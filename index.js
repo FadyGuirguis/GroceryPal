@@ -1,8 +1,9 @@
-let express = require('express');
-let bodyParser = require('body-parser');
-let cors = require('cors');
+const express = require('express');
+const bodyParser = require('body-parser');
+const cors = require('cors');
 
 require('./config/config.js');
+require('./db/mongoose');
 
 let app = express();
 
