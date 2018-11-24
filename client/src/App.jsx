@@ -1,14 +1,20 @@
-import React, { Component } from 'react';
+import React from 'react';
+import Login from './components/Login/Login.jsx';
 import './App.css';
+import { Route, Redirect, Switch } from 'react-router-dom'; 
 
-class App extends Component {
-  render() {
+const app = (props) => {
+  
     return (
-      <div className="App">
-        
+      <div>
+        <Switch>
+          <Route path="/login" exact component={Login} />
+          <Redirect from="/" to="/login" />
+        </ Switch>   
       </div>
-    );
-  }
+    )
+  
 }
 
-export default App;
+
+export default app;
