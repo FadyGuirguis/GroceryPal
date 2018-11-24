@@ -12,7 +12,11 @@ const navbar = props => {
     <div className="root">
       <AppBar position="static" style={{ backgroundColor: "#62AA00" }}>
         <Toolbar>
-          <IconButton color="inherit" aria-label="Menu">
+          <IconButton
+            color="inherit"
+            aria-label="Menu"
+            onClick={() => props.openDrawer()}
+          >
             <MenuIcon />
           </IconButton>
           <Typography variant="title" color="inherit" className="flex">
