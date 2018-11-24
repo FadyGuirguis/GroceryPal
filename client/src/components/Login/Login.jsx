@@ -27,6 +27,10 @@ class Login extends Component {
     disabled: false
   };
 
+  loginSubmitHandler () {
+    this.props.history.push('/home');
+  }
+
   render() {
     const { classes } = this.props;
     return (
@@ -73,7 +77,7 @@ class Login extends Component {
                       backgroundColor: "#62AA00"
                     }}
                     className={classes.button}
-                    //onClick={() => this.loginSubmitHandler()}
+                    onClick={() => this.loginSubmitHandler()}
                   >
                     Login
                   </Button>

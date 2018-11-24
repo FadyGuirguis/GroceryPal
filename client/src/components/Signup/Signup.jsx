@@ -96,7 +96,7 @@ class Signup extends Component {
                   //onClick={() => this.loginSubmitHandler()}
                   >
                     Register
-                              </Button>
+                  </Button>
 
                 </ form>
 

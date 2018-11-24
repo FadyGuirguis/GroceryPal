@@ -1,0 +1,18 @@
+.root {
+  flex-grow: 1;
+  width: 100%;
+}
+.flex {
+  flex: 1;
+}
+.menuButton {
+  margin-left: -12;
+  margin-right: 20;
+}
+
+.logout-button {
+  width: 10%
+}
+a:hover {
+cursor: pointer;
+}
