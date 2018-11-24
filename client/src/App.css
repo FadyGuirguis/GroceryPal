@@ -1,3 +1,7 @@
 body {
     overflow-x:hidden;
 }
+
+.align-center-ver {
+    padding-top: 20%;
+}
