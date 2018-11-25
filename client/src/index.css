@@ -9,3 +9,8 @@ button {
 a:hover {
     cursor: pointer;
 }
+
+html {
+    height: 100%;
+    background-color: #62AA00;
+}

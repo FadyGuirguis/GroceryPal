@@ -10,7 +10,11 @@ import "./Navbar.css";
 const navbar = props => {
   return (
     <div className="root">
-      <AppBar position="static" style={{ backgroundColor: "#62AA00" }}>
+      <AppBar position="static" 
+      style={{ 
+        backgroundColor: "#333333",
+        color: "#FFFFFF"
+      }}>
         <Toolbar>
           <IconButton
             color="inherit"

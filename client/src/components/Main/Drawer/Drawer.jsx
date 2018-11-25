@@ -22,13 +22,16 @@ const drawer = (props) => {
   const { classes } = props;
 
   return (
-    <Drawer open={props.isOpen} onClose={() => props.closeDrawer()}>
+    <Drawer 
+      open={props.isOpen} 
+      onClose={() => props.closeDrawer()}
+      >
       <div
         tabIndex={0}
         role="button"
         onClick={() => props.closeDrawer()}
         onKeyDown={() => props.closeDrawer()}
-      >
+        >
 
         <List className={classes.list}>
           <ListItem

@@ -8,7 +8,11 @@ import Main from './components/Main/Main.jsx';
 const app = (props) => {
   
     return (
-      <div>
+      <div
+        style={{
+          backgroundColor:'#62AA00'
+        }}
+        >
         <Switch>
           <Route path="/login" exact component={Login} />
           <Route path="/signup" exact component={Signup} />
