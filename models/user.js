@@ -1,10 +1,6 @@
 const mongoose = require('mongoose');
 const jwt = require('jsonwebtoken');
-const _ = require('lodash');
-const bcrypt = require('bcryptjs');
 const beautifyUnique = require('mongoose-beautiful-unique-validation');
-const validate = require('mongoose-validator')
-const uniqueValidator = require('mongoose-unique-validator');
 
 const UserSchema = mongoose.Schema({
   userName: {

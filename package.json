@@ -12,17 +12,14 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.3",
     "concurrently": "^4.1.0",
     "cors": "^2.8.5",
     "express": "^4.16.4",
     "express-async-handler": "^1.1.4",
     "jsonwebtoken": "^8.4.0",
-    "moment": "^2.22.2",
+    "lodash": "^4.17.11",
     "mongoose": "^5.3.13",
-    "mongoose-beautiful-unique-validation": "^7.1.1",
-    "mongoose-unique-validator": "^2.0.2",
-    "mongoose-validator": "^2.1.0"
+    "mongoose-beautiful-unique-validation": "^7.1.1"
   }
 }

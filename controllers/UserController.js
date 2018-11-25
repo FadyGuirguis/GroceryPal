@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 const _ = require('lodash');
-moment = require('moment'),
 User = mongoose.model('User');
 
 module.exports.createUser = async (req, res) => {
@@ -66,11 +65,5 @@ module.exports.logout = async (req, res) => {
 }
 
 module.exports.me = async(req, res) => {
-  User.findByToken(req.header('x-auth')).then((returnedUser) => {
-    user = {
-      userName: returnedUser.userName,
-      password: returnedUser.password
-    }
-    res.status(200).send({user});
-  })
+    res.status(200).send(req.user);
 }
