@@ -10,7 +10,7 @@ import "./Navbar.css";
 const navbar = props => {
   return (
     <div className="root">
-      <AppBar position="static" 
+      <AppBar position="fixed" 
       style={{ 
         backgroundColor: "#333333",
         color: "#FFFFFF"
@@ -31,7 +31,11 @@ const navbar = props => {
           </Button>
         </Toolbar>
       </AppBar>
+      <div style={{
+        height: '70px'
+      }} /> 
     </div>
+    
   );
 };
 
