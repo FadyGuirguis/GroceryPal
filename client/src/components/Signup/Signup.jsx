@@ -40,11 +40,10 @@ class Signup extends Component {
             <Card className={classes.card}>
               <Col lg="6">
                 <form >
-                  <div fullWidth>
-                    <h2> Sign Up </h2>
-                  </ div>
+                  
+                  <h2> Sign Up </h2>
+
                   <TextField
-                    id="full-width"
                     label="Username"
                     autoFocus
                     InputLabelProps={{
@@ -56,8 +55,7 @@ class Signup extends Component {
                     margin="normal"
                   //onChange={(event) => this.setState({username: event.target.value})}
                   />
-                  <TextField
-                    id="full-width"
+                  <TextField               
                     label="Password"
                     InputLabelProps={{
                       shrink: true,
@@ -70,8 +68,7 @@ class Signup extends Component {
                     margin="normal"
                   //onChange={(event) => this.setState({password: event.target.value})}
                   />
-                  <TextField
-                    id="full-width"
+                  <TextField                   
                     label="Enter password again"
                     InputLabelProps={{
                       shrink: true,
@@ -88,7 +85,6 @@ class Signup extends Component {
                     type="submit"
                     disabled={this.state.disabled}
                     variant="contained"
-                    color="success"
                     style={{
                       backgroundColor: '#62AA00'
                     }}

@@ -28,7 +28,7 @@ class Login extends Component {
   };
 
   loginSubmitHandler () {
-    this.props.history.push('/home');
+    this.props.history.push('/recipes');
   }
 
   render() {
@@ -42,7 +42,6 @@ class Login extends Component {
               <Col lg="6">
                 <form>
                   <TextField
-                    id="full-width"
                     label="Username"
                     autoFocus
                     InputLabelProps={{
@@ -55,7 +54,6 @@ class Login extends Component {
                     //onChange={(event) => this.setState({username: event.target.value})}
                   />
                   <TextField
-                    id="full-width"
                     label="Password"
                     InputLabelProps={{
                       shrink: true
@@ -72,7 +70,6 @@ class Login extends Component {
                     type="submit"
                     disabled={this.state.disabled}
                     variant="contained"
-                    color="success"
                     style={{
                       backgroundColor: "#62AA00"
                     }}
@@ -81,7 +78,7 @@ class Login extends Component {
                   >
                     Login
                   </Button>
-                  <div fullwidth>
+                  <div>
                     Don't have an account yet? Register
                     <a
                       style={{
