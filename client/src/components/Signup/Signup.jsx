@@ -26,7 +26,13 @@ class Signup extends Component {
     username: '',
     password: '',
     repeatPassword: '',
-    buttonDisable: false
+    buttonDisable: false,
+    error: true,
+    passwordMatch: true
+  }
+
+  signupSubmitHandler() {
+
   }
 
   render() {
@@ -53,7 +59,7 @@ class Signup extends Component {
                     placeholder="username"
                     fullWidth
                     margin="normal"
-                  //onChange={(event) => this.setState({username: event.target.value})}
+                    onChange={(event) => this.setState({username: event.target.value})}
                   />
                   <TextField               
                     label="Password"
@@ -66,7 +72,7 @@ class Signup extends Component {
                     value={this.state.password}
                     fullWidth
                     margin="normal"
-                  //onChange={(event) => this.setState({password: event.target.value})}
+                    onChange={(event) => this.setState({password: event.target.value})}
                   />
                   <TextField                   
                     label="Enter password again"
@@ -79,8 +85,17 @@ class Signup extends Component {
                     value={this.state.repeatPassword}
                     fullWidth
                     margin="normal"
-                  //onChange={(event) => this.setState({password: event.target.value})}
+                    onChange={(event) => {
+                      console.log('password', this.state.password);
+                      console.log('repeat', event.target.value)
+                      this.setState({
+                        repeatPassword: event.target.value,
+                        passwordMatch: this.state.password === event.target.value
+                      })
+                    }}
                   />
+                  {!this.state.passwordMatch ? <p style={{color: 'red'}}>passwords don't match</p> : null}
+                  {this.state.error ? <p style={{color: 'red'}}>an error has occured</p> : null}
                   <Button
                     type="submit"
                     disabled={this.state.disabled}
@@ -89,11 +104,11 @@ class Signup extends Component {
                       backgroundColor: '#62AA00'
                     }}
                     className={classes.button}
-                  //onClick={() => this.loginSubmitHandler()}
+                    onClick={() => this.signupSubmitHandler()}
                   >
                     Register
                   </Button>
-
+                  
                 </ form>
 
               </ Col>

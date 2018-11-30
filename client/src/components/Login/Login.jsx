@@ -24,11 +24,12 @@ class Login extends Component {
   state = {
     username: "",
     password: "",
-    disabled: false
+    disabled: false,
+    error: false
   };
 
   loginSubmitHandler () {
-    this.props.history.push('/recipes');
+    
   }
 
   render() {
@@ -51,7 +52,7 @@ class Login extends Component {
                     placeholder="username"
                     fullWidth
                     margin="normal"
-                    //onChange={(event) => this.setState({username: event.target.value})}
+                    onChange={(event) => this.setState({username: event.target.value})}
                   />
                   <TextField
                     label="Password"
@@ -64,7 +65,10 @@ class Login extends Component {
                     value={this.state.password}
                     fullWidth
                     margin="normal"
+                    onChange={(event) => this.setState({password: event.target.value})}
                   />
+                  {this.state.error ? <p style={{color: 'red'}}>username or password incorrect</p> : null}
+                  
                   <Button
                     type="submit"
                     disabled={this.state.disabled}
