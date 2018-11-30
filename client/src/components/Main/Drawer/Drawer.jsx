@@ -36,7 +36,7 @@ const drawer = (props) => {
         <List className={classes.list}>
           <ListItem
             button
-           // onClick={() => props.showSprintModal()}
+            onClick={() => props.navigate('/shoppinglist')}
            >
             <ListItemIcon>
               <ShoppingIcon />
@@ -45,7 +45,7 @@ const drawer = (props) => {
           </ListItem>
           <ListItem
             button
-           // onClick={() => props.showUSModal()}
+            onClick={() => props.navigate('/pantry')}
            >
             <ListItemIcon>
               <FoodIcon />
@@ -54,7 +54,7 @@ const drawer = (props) => {
           </ListItem>
           <ListItem
             button
-           // onClick={() => props.showUSModal()}
+            onClick={() => props.navigate('/recipes')}
            >
             <ListItemIcon>
               <RecipeIcon />

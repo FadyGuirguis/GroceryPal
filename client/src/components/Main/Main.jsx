@@ -133,7 +133,9 @@ class Main extends Component {
     recipeIngredientsChecked: [],
     reicpeSearchDisabled: false,
     shoppingListAdd: '',
-    shoppingListDisabled: false
+    shoppingListDisabled: false,
+    pantryAdd: '',
+    pantryDisabled: false,
   }
 
   handleRecipeIngredientToggle = value => {
@@ -164,6 +166,12 @@ class Main extends Component {
     });
   };
 
+  pantryAddChangeHandler(item) {
+    this.setState({
+      pantryAdd: item
+    });
+  };
+
   // recipes actions handler
 
   recipeSearchHandler() {
@@ -174,8 +182,8 @@ class Main extends Component {
     // set state.recipes to the returned recipes and state.reicpeSearchDisabled to false
   };
 
-  // shopping list action hander
-  
+  // shopping list action handlers
+
   // in all the actions set state.shoppingListDisable to true at the beginning and convert
   // it back to false when you're done
 
@@ -191,14 +199,34 @@ class Main extends Component {
     // item to add is stored in state.shoppingListAdd
   };
 
+  // pantry action handlers
+
+  // in all the actions set state.shoppingListDisable to true at the beginning and convert
+  // it back to false when you're done
+
+  deletePantryItem(item) {
+
+  };
+
+  moveFromPantryToShoppingList(item) {
+  
+  };
+
+  addToPantry() {
+    // item to add is stored in state.shoppingListAdd
+  };
+
   render () {
     return <Aux>
         <Navbar navigate={path => this.props.history.push(path)} openDrawer={() => this.setState(
               { drawerOpen: true }
             )} />
-        <Drawer isOpen={this.state.drawerOpen} closeDrawer={() => this.setState(
+        <Drawer 
+          isOpen={this.state.drawerOpen} 
+          closeDrawer={() => this.setState(
               { drawerOpen: false }
-            )} />
+            )}
+          navigate={path => this.props.history.push(path)} />
         <div style={{ minHeight: "100%" }}>
           <Switch>
             <Route path="/recipes" exact render={() => 
@@ -213,7 +241,14 @@ class Main extends Component {
                 />} 
               />
             <Route path="/pantry" exact render={() => 
-              <Pantry />}
+              <Pantry 
+              list={this.state.pantry}
+              delete={item => this.deletePantryItem(item)}
+              move={item => this.moveFromPantryToShoppingList(item)}
+              add={() => this.addToPantry()}
+              searchString={this.state.pantryAdd}
+              change={item => this.pantryAddChangeHandler(item)}
+              disabled={this.state.pantryDisabled}/>}
               />
             <Route path="/shoppinglist" exact render={() => 
               <ShoppingList 
@@ -224,7 +259,6 @@ class Main extends Component {
                 searchString={this.state.shoppingListAdd}
                 change={item => this.shoppingListAddChangeHandler(item)}
                 disabled={this.state.shoppingListDisabled}/>}
-                
               />
             <Redirect from="/" to="/login" />
           </Switch>
