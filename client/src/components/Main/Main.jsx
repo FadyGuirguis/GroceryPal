@@ -5,6 +5,8 @@ import Footer from './Footer/Footer.jsx';
 import Aux from '../Aux.jsx';
 import { Route, Redirect, Switch } from 'react-router-dom'; 
 import Recipes from './Recipes/Recipes';
+import Pantry from './Pantry/Pantry.jsx';
+import ShoppingList from './ShoppingList/ShoppingList.jsx';
 
 class Main extends Component {
 
@@ -90,8 +92,48 @@ class Main extends Component {
       'eggs',
       'almonds'
     ],
+    shoppingList: [
+      'chicken breasts',
+      'chicken thighs',
+      'asparagus',
+      'potatoes',
+      'ice cream',
+      'chocolate sauce',
+      'flour',
+      'milk',
+      'mushrooms',
+      'cheddar',
+      'eggs',
+      'almonds',
+      'chicken breasts',
+      'chicken thighs',
+      'asparagus',
+      'potatoes',
+      'ice cream',
+      'chocolate sauce',
+      'flour',
+      'milk',
+      'mushrooms',
+      'cheddar',
+      'eggs',
+      'almonds',
+      'chicken breasts',
+      'chicken thighs',
+      'asparagus',
+      'potatoes',
+      'ice cream',
+      'chocolate sauce',
+      'flour',
+      'milk',
+      'mushrooms',
+      'cheddar',
+      'eggs',
+      'almonds',
+    ],
     recipeIngredientsChecked: [],
-    reicpeSearchDisabled: false
+    reicpeSearchDisabled: false,
+    shoppingListAdd: '',
+    shoppingListDisabled: false
   }
 
   handleRecipeIngredientToggle = value => {
@@ -116,13 +158,38 @@ class Main extends Component {
     });
   };
 
+  shoppingListAddChangeHandler(item) {
+    this.setState({
+      shoppingListAdd: item
+    });
+  };
+
+  // recipes actions handler
+
   recipeSearchHandler() {
     this.setState({
       reicpeSearchDisabled: true
     });
     // you should use state.recipeIngredientsChecked for the search
     // set state.recipes to the returned recipes and state.reicpeSearchDisabled to false
-  }
+  };
+
+  // shopping list action hander
+  
+  // in all the actions set state.shoppingListDisable to true at the beginning and convert
+  // it back to false when you're done
+
+  deleteShoppingListItem(item) {
+    
+  };
+
+  moveFromShoppingListToPantry(item) {
+    
+  };
+
+  addToShoppingList() {
+    // item to add is stored in state.shoppingListAdd
+  };
 
   render () {
     return <Aux>
@@ -144,6 +211,20 @@ class Main extends Component {
                 search={() => this.recipeSearchHandler()}
                 disabled={this.state.reicpeSearchDisabled}
                 />} 
+              />
+            <Route path="/pantry" exact render={() => 
+              <Pantry />}
+              />
+            <Route path="/shoppinglist" exact render={() => 
+              <ShoppingList 
+                list={this.state.shoppingList}
+                delete={item => this.deleteShoppingListItem(item)}
+                move={item => this.moveFromShoppingListToPantry(item)}
+                add={() => this.addToShoppingList()}
+                searchString={this.state.shoppingListAdd}
+                change={item => this.shoppingListAddChangeHandler(item)}
+                disabled={this.state.shoppingListDisabled}/>}
+                
               />
             <Redirect from="/" to="/login" />
           </Switch>

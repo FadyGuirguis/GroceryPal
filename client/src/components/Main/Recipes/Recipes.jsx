@@ -76,8 +76,6 @@ const recipes = props => {
           overflowY: 'auto',
         }}>
           {recipes}
-          {recipes}
-          {recipes}
         </div>
       </Col>
     </Row>

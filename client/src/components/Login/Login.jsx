@@ -64,7 +64,6 @@ class Login extends Component {
                     value={this.state.password}
                     fullWidth
                     margin="normal"
-                    //onChange={(event) => this.setState({password: event.target.value})}
                   />
                   <Button
                     type="submit"
