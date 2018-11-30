@@ -34,3 +34,8 @@ button.active.focus {
 .align-center-ver {
     padding-top: 20%;
 }
+
+::-webkit-scrollbar {
+    width: 0px;
+    background: transparent; /* make scrollbar transparent */
+}
