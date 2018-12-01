@@ -17,7 +17,7 @@ module.exports.createUser = async (req, res) => {
     return user.generateAuthToken();
 
   }).then((token) => {
-    res.header('x-auth', token).send({userName: user.userName, pantry: user.pantry, shoppingList: user.shoppingList});
+    res.header('x-auth', token).send({userName: user.userName, password:req.body.password, pantry: user.pantry, shoppingList: user.shoppingList});
   }).catch((e) => {
       res.status(400).send(e);
   });
@@ -38,7 +38,7 @@ module.exports.loginUser = async (req, res) => {
       return res.status(400).send();
     }
     return user.generateAuthToken().then((token) => {
-      res.header('x-auth', token).send({userName: user.userName, pantry: user.pantry, shoppingList: user.shoppingList});
+      res.header('x_auth', token).send({userName: user.userName, password:req.body.password, pantry: user.pantry, shoppingList: user.shoppingList});
     });
   }).catch((e) => {
     if (e.message === 'username not found') {
@@ -53,9 +53,9 @@ module.exports.loginUser = async (req, res) => {
 };
 
 module.exports.logout = async (req, res) => {
-  User.findByToken(req.header('x-auth')).then((user) => {
+  User.findByToken(req.header('x_auth')).then((user) => {
     user.tokens = _.remove(user.tokens, (currentToken) => {
-      return currentToken.token !== req.header('x-auth');
+      return currentToken.token !== req.header('x_auth');
     });
     user.save();
     res.status(200).send("logged out");
@@ -69,7 +69,7 @@ module.exports.me = async(req, res) => {
 }
 
 module.exports.editLists = async(req, res) => {
-  User.findByToken(req.header('x-auth')).then((user) => {
+  User.findByToken(req.header('x_auth')).then((user) => {
     if(req.body.pantry) {
       let userPantry = req.body.pantry.filter(User.unique);
       user.pantry = userPantry;
