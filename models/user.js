@@ -16,6 +16,8 @@ const UserSchema = mongoose.Schema({
     required: true,
     minlength: [6, 'password must be at least 6 characters']
   },
+  pantry: [],
+  shoppingList: [],
   tokens: [{
     access: {
       type: String,
@@ -104,5 +106,9 @@ UserSchema.pre('save', function (next) {
     next();
   }
 });
+
+UserSchema.statics.unique = function (value, index, self) {
+  return self.indexOf(value) === index;
+}
 
 module.exports.User = mongoose.model('User', UserSchema);

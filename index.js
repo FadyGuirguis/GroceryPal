@@ -33,6 +33,7 @@ app.post('/register', asyncMiddleware(userController.createUser));
 app.post('/login', asyncMiddleware(userController.loginUser));
 app.post('/logout', authModule.authenticate, asyncMiddleware(userController.logout));
 app.post('/me', authModule.authenticate, asyncMiddleware(userController.me));
+app.post('/lists', authModule.authenticate, asyncMiddleware(userController.editLists));
 
 app.listen(process.env.PORT, () => {
   console.log(`Server running on port ${process.env.PORT}`);
