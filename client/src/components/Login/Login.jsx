@@ -5,6 +5,7 @@ import Card from "@material-ui/core/Card";
 import TextField from "@material-ui/core/TextField";
 import { Row, Col } from "reactstrap";
 import Button from "@material-ui/core/Button";
+import api from '../../api/api'
 
 const styles = theme => ({
   button: {
@@ -30,13 +31,36 @@ class Login extends Component {
   };
 
   loginSubmitHandler () {
+    this.setState({
+      disabled: true
+    })
 
-    // replace user with the returned user 
-    this.props.setUser({
-      username: 'fady',
-      password: 'fadysameh'
-    });
-    this.props.history.push('/pantry');
+    api.post('/login', {
+      userName: this.state.username,
+      password: this.state.password
+    })
+    .then((response) => {
+      api.defaults.headers['x_auth'] = `${response.headers.x_auth}`
+      
+      this.props.setUser({
+        username: response.data.userName,
+        password: response.data.password,
+        pantry: response.data.pantry,
+        shoppingList: response.data.shoppingList
+      });
+
+      this.setState({
+        disabled: false
+      })
+
+      this.props.history.push('/pantry');
+    })
+    .catch((error) => {
+      this.setState({
+        disabled: false,
+        error: true
+      })
+     });
   };
 
   render() {

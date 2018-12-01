@@ -8,6 +8,7 @@ import { Route, Redirect, Switch } from 'react-router-dom';
 import Recipes from './Recipes/Recipes';
 import Pantry from './Pantry/Pantry.jsx';
 import ShoppingList from './ShoppingList/ShoppingList.jsx';
+import api from '../../api/api' 
 
 class Main extends Component {
 
@@ -207,7 +208,7 @@ class Main extends Component {
   // it back to false when you're done
 
   deleteShoppingListItem(item) {
-    
+
   };
 
   moveFromShoppingListToPantry(item) {
