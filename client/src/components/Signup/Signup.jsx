@@ -27,7 +27,7 @@ class Signup extends Component {
     username: '',
     password: '',
     repeatPassword: '',
-    buttonDisable: false,
+    disabled: false,
     error: false,
     passwordMatch: true
   }
@@ -96,7 +96,8 @@ class Signup extends Component {
                       console.log('repeat', event.target.value)
                       this.setState({
                         repeatPassword: event.target.value,
-                        passwordMatch: this.state.password === event.target.value
+                        passwordMatch: this.state.password === event.target.value,
+                        disabled: this.state.password !== event.target.value
                       })
                     }}
                   />

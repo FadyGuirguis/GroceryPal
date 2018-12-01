@@ -142,12 +142,15 @@ class Main extends Component {
   componentDidMount() {
     // this is to disallow redirecting to a another page without
     // passing through authentication
-    console.log('user', this.props.user);
     if (this.props.user === null) {
       return this.props.history.replace('/login');
     }
 
-    // here you should fetch the initial shopping list and pantry and set the state
+    this.setState({
+      shoppingList: this.props.user.shoppingList,
+      pantry: this.props.user.pantry
+    })
+
   }
 
   componentWillUnmount() {
