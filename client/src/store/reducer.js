@@ -3,7 +3,7 @@ const initialState = {
 };
 
 const reducer = (state = initialState, action) => {
-  if (action === 'SET_USER') {
+  if (action.type === 'SET_USER') {
     return {
       user: action.user
     };
