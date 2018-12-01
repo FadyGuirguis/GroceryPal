@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import Navbar from './Navbar/Navbar.jsx';
 import Drawer from './Drawer/Drawer.jsx';
 import Footer from './Footer/Footer.jsx';
@@ -138,6 +139,24 @@ class Main extends Component {
     pantryDisabled: false,
   }
 
+  componentDidMount() {
+    // this is to disallow redirecting to a another page without
+    // passing through authentication
+    if (this.props.user === null) {
+      return this.props.history.replace('/login');
+    }
+
+    this.setState({
+      shoppingList: this.props.user.shoppingList,
+      pantry: this.props.user.pantry
+    })
+
+  }
+
+  componentWillUnmount() {
+    this.props.setUser(null);
+  }
+
   handleRecipeIngredientToggle = value => {
     const { recipeIngredientsChecked } = this.state;
     const currentIndex = recipeIngredientsChecked.indexOf(value);
@@ -218,7 +237,12 @@ class Main extends Component {
 
   render () {
     return <Aux>
-        <Navbar navigate={path => this.props.history.push(path)} openDrawer={() => this.setState(
+        <Navbar 
+          navigate={path => this.props.history.push(path)}
+          logout={() => {
+            this.props.history.push('/login');
+          }}
+          openDrawer={() => this.setState(
               { drawerOpen: true }
             )} />
         <Drawer 
@@ -268,4 +292,19 @@ class Main extends Component {
   }
 }
 
-export default Main;
+const mapStateToProps = state => {
+  return {
+    user: state.user
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    setUser: user => dispatch({
+      type: 'SET_USER',
+      user
+    })
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Main);

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { withStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import TextField from '@material-ui/core/TextField';
@@ -26,13 +27,18 @@ class Signup extends Component {
     username: '',
     password: '',
     repeatPassword: '',
-    buttonDisable: false,
-    error: true,
+    disabled: false,
+    error: false,
     passwordMatch: true
   }
 
   signupSubmitHandler() {
-
+    // replace user with the returned user 
+    this.props.setUser({
+      username: 'fady',
+      password: 'fadysameh'
+    });
+    this.props.history.push('/pantry');
   }
 
   render() {
@@ -90,7 +96,8 @@ class Signup extends Component {
                       console.log('repeat', event.target.value)
                       this.setState({
                         repeatPassword: event.target.value,
-                        passwordMatch: this.state.password === event.target.value
+                        passwordMatch: this.state.password === event.target.value,
+                        disabled: this.state.password !== event.target.value
                       })
                     }}
                   />
@@ -127,4 +134,13 @@ class Signup extends Component {
   }
 }
 
-export default withStyles(styles, { withTheme: true })(Signup);
+const mapDispatchToProps = dispatch => {
+  return {
+    setUser: user => dispatch({
+      type: 'SET_USER',
+      user
+    })
+  };
+};
+
+export default withStyles(styles, { withTheme: true })(connect(null, mapDispatchToProps)(Signup));

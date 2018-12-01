@@ -26,7 +26,7 @@ const navbar = props => {
           <Typography variant="title" color="inherit" className="flex">
             GroceryPal
           </Typography>
-          <Button color="inherit" onClick={() => props.navigate("/login")}>
+          <Button color="inherit" onClick={() => props.logout()}>
             Logout
           </Button>
         </Toolbar>
