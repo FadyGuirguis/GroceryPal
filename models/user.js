@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const jwt = require('jsonwebtoken');
+const bcrypt = require('bcryptjs');
 const beautifyUnique = require('mongoose-beautiful-unique-validation');
 
 const UserSchema = mongoose.Schema({
@@ -33,7 +34,7 @@ UserSchema.plugin(beautifyUnique);
 UserSchema.methods.generateAuthToken = function () {
   var user = this;
   var access = 'auth';
-  var token = jwt.sign({ _id: user._id.toHexString(), access }, 'abc123').toString();
+  var token = jwt.sign({ _id: user._id.toHexString(), access }, process.env.JWT_SECRET).toString();
 
 
   user.tokens.unshift({ access, token });
@@ -44,20 +45,19 @@ UserSchema.methods.generateAuthToken = function () {
 };
 
 UserSchema.statics.findByCredentials = function (userName, password) {
-  let User = this;
-  return User.findOne({ userName }).then((user) => {
-
-
+  var User = this;
+  return User.findOne({userName}).then((user) => {
     return new Promise((resolve, reject) => {
       if (!user) {
         reject(new Error('username not found'));
       }
-      else if (user.password != password) {
-          reject(new Error('password not correct'));
-      }
-      else {
-        resolve(user);
-      }
+      bcrypt.compare(password, user.password, (err, res) => {
+        if (res) {
+          resolve(user);
+        } else {
+          reject(new Error("password not correct"));
+        }
+      });
     });
   });
 };
@@ -89,5 +89,20 @@ UserSchema.statics.removeToken = function (token) {
     return User;
   })
 }
+
+UserSchema.pre('save', function (next) {
+  var user = this;
+
+  if (user.isModified('password')) {
+    bcrypt.genSalt(10, (err, salt) => {
+      bcrypt.hash(user.password, salt, (err, hash) => {
+        user.password = hash;
+        next();
+      });
+    });
+  } else {
+    next();
+  }
+});
 
 module.exports.User = mongoose.model('User', UserSchema);

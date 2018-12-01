@@ -17,7 +17,7 @@ module.exports.createUser = async (req, res) => {
     return user.generateAuthToken();
 
   }).then((token) => {
-    res.header('x-auth', token).send({ user });
+    res.header('x-auth', token).send({userName: user.userName});
   }).catch((e) => {
       res.status(400).send(e);
   });
@@ -38,7 +38,7 @@ module.exports.loginUser = async (req, res) => {
       return res.status(400).send();
     }
     return user.generateAuthToken().then((token) => {
-      res.header('x-auth', token).send({ user });
+      res.header('x-auth', token).send({userName: user.userName});
     });
   }).catch((e) => {
     if (e.message === 'username not found') {
@@ -58,12 +58,12 @@ module.exports.logout = async (req, res) => {
       return currentToken.token !== req.header('x-auth');
     });
     user.save();
-    res.status(200).send({user});
+    res.status(200).send("logged out");
   }).catch((err) => {
     res.status(500).send();
   });
 }
 
 module.exports.me = async(req, res) => {
-    res.status(200).send(req.user);
+    res.status(200).send({userName: req.user.userName});
 }
