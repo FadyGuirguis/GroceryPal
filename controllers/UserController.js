@@ -17,7 +17,7 @@ module.exports.createUser = async (req, res) => {
     return user.generateAuthToken();
 
   }).then((token) => {
-    res.header('x-auth', token).send({userName: user.userName});
+    res.header('x-auth', token).send({userName: user.userName, pantry: user.pantry, shoppingList: user.shoppingList});
   }).catch((e) => {
       res.status(400).send(e);
   });
@@ -38,7 +38,7 @@ module.exports.loginUser = async (req, res) => {
       return res.status(400).send();
     }
     return user.generateAuthToken().then((token) => {
-      res.header('x-auth', token).send({userName: user.userName});
+      res.header('x-auth', token).send({userName: user.userName, pantry: user.pantry, shoppingList: user.shoppingList});
     });
   }).catch((e) => {
     if (e.message === 'username not found') {
@@ -66,4 +66,21 @@ module.exports.logout = async (req, res) => {
 
 module.exports.me = async(req, res) => {
     res.status(200).send({userName: req.user.userName});
+}
+
+module.exports.editLists = async(req, res) => {
+  User.findByToken(req.header('x-auth')).then((user) => {
+    if(req.body.pantry) {
+      let userPantry = req.body.pantry.filter(User.unique);
+      user.pantry = userPantry;
+    }
+    if(req.body.shoppingList) {
+      let userShoppingList = req.body.shoppingList.filter(User.unique);
+      user.shoppingList = userShoppingList;
+    }
+    user.save();
+    res.status(200).send({pantry: user.pantry, shoppingList: user.shoppingList})
+  }).catch((err) => {
+    res.status(500).send();
+  });
 }
