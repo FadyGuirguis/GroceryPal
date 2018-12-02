@@ -94,12 +94,12 @@ module.exports.recipes = async(req, res) => {
   axios.get('https://api.edamam.com/search', {params: {q: q, app_id: process.env.APP_ID, app_key: process.env.APP_KEY}})
   .then((response) => {
     response.data.hits.forEach((element) => {
-      recipes.push({
-        uri: element.recipe.uri,
+      recipes.push({recipe: {
+        url: element.recipe.url,
         label: element.recipe.label,
         image: element.recipe.image,
         ingredientLines: element.recipe.ingredientLines
-      })
+      }})
     })
     res.status(200).send(recipes);
   })

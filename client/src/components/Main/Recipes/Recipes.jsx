@@ -6,9 +6,9 @@ import Button from '@material-ui/core/Button';
 
 const recipes = props => {
   
-  const recipes = props.recipes.map(recipe => (
+  const recipes = props.recipes.map((recipe, index) => (
     <Recipe
-      key={recipe.recipe.url}
+      key={index}
       title={recipe.recipe.label}
       image={recipe.recipe.image}
       ingredients={recipe.recipe.ingredientLines}
