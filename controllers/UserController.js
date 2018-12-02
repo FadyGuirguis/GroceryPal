@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const _ = require('lodash');
 User = mongoose.model('User');
+const axios = require('axios');
 
 module.exports.createUser = async (req, res) => {
   let body = _.pick(req.body, ['userName', 'password']);
@@ -83,4 +84,26 @@ module.exports.editLists = async(req, res) => {
   }).catch((err) => {
     res.status(500).send();
   });
+}
+
+module.exports.recipes = async(req, res) => {
+  if(! req.body.ingredients)
+    return res.status(400).send("please mark your ingredients");
+  let q = req.body.ingredients.join("+");
+  let recipes = [];
+  axios.get('https://api.edamam.com/search', {params: {q: q, app_id: process.env.APP_ID, app_key: process.env.APP_KEY}})
+  .then((response) => {
+    response.data.hits.forEach((element) => {
+      recipes.push({
+        uri: element.recipe.uri,
+        label: element.recipe.label,
+        image: element.recipe.image,
+        ingredientLines: element.recipe.ingredientLines
+      })
+    })
+    res.status(200).send(recipes);
+  })
+  .catch((err) => {
+    res.status(400).send()
+  })
 }

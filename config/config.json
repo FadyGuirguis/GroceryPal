@@ -2,6 +2,8 @@
   "development": {
     "PORT": 4000,
     "MONGODB_URI": "mongodb://localhost:27017/grocerypal-development",
-    "JWT_SECRET" : "abc123"
+    "JWT_SECRET": "abc123",
+    "APP_ID": "b4c73ea2",
+    "APP_KEY": "4424ab8f3081d30fdfdbbaf40907dfa9"
   }
 }

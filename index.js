@@ -34,6 +34,7 @@ app.post('/login', asyncMiddleware(userController.loginUser));
 app.post('/logout', authModule.authenticate, asyncMiddleware(userController.logout));
 app.post('/me', authModule.authenticate, asyncMiddleware(userController.me));
 app.post('/lists', authModule.authenticate, asyncMiddleware(userController.editLists));
+app.post('/recipes', authModule.authenticate, asyncMiddleware(userController.recipes));
 
 app.listen(process.env.PORT, () => {
   console.log(`Server running on port ${process.env.PORT}`);
