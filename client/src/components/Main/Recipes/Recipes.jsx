@@ -8,7 +8,7 @@ const recipes = props => {
   
   const recipes = props.recipes.map(recipe => (
     <Recipe
-      key={recipe.recipe.url}
+      key={recipe.index}
       title={recipe.recipe.label}
       image={recipe.recipe.image}
       ingredients={recipe.recipe.ingredientLines}
