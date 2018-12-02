@@ -210,7 +210,7 @@ class Main extends Component {
   deleteShoppingListItem(item) {
     this.setState({shoppingListDisabled: true});
     
-    let newShoppingList = this.state.shoppingList;
+    let newShoppingList = [...this.state.shoppingList];
     newShoppingList.splice(newShoppingList.indexOf(item), 1);
     
     api.post('/lists', {
@@ -229,10 +229,10 @@ class Main extends Component {
   moveFromShoppingListToPantry(item) {
     this.setState({shoppingListDisabled: true});
 
-    let newShoppingList = this.state.shoppingList;
+    let newShoppingList = [...this.state.shoppingList];
     newShoppingList.splice(newShoppingList.indexOf(item), 1);
 
-    let newPantry = this.state.pantry;
+    let newPantry = [...this.state.pantry];
     newPantry.push(item);
 
     api.post('/lists', {
@@ -254,7 +254,7 @@ class Main extends Component {
     // item to add is stored in state.shoppingListAdd
     this.setState({shoppingListDisabled: true});
 
-    let newShoppingList = this.state.shoppingList;
+    let newShoppingList = [...this.state.shoppingList];
     newShoppingList.push(this.state.shoppingListAdd);
 
     api.post('/lists', {
@@ -278,7 +278,7 @@ class Main extends Component {
   deletePantryItem(item) {
     this.setState({shoppingListDisabled: true});
 
-    let newPantry = this.state.pantry;
+    let newPantry = [...this.state.pantry];
     newPantry.splice(newPantry.indexOf(item), 1);
 
     api.post('/lists', {
@@ -297,10 +297,10 @@ class Main extends Component {
   moveFromPantryToShoppingList(item) {
     this.setState({shoppingListDisabled: true});
 
-    let newPantry = this.state.pantry;
+    let newPantry = [...this.state.pantry];
     newPantry.splice(newPantry.indexOf(item), 1);
 
-    let newShoppingList = this.state.shoppingList;
+    let newShoppingList = [...this.state.shoppingList];
     newShoppingList.push(item);
 
     api.post('/lists', {
@@ -322,7 +322,7 @@ class Main extends Component {
     // item to add is stored in state.pantryAdd
     this.setState({shoppingListDisabled: true});
 
-    let newPantry = this.state.pantry;
+    let newPantry = [...this.state.pantry];
     newPantry.push(this.state.pantryAdd);
     
     api.post('/lists', {
