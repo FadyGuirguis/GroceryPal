@@ -17,7 +17,7 @@ module.exports.createUser = async (req, res) => {
     return user.generateAuthToken();
 
   }).then((token) => {
-    res.header('x-auth', token).send({userName: user.userName, password:req.body.password, pantry: user.pantry, shoppingList: user.shoppingList});
+    res.header('x-auth', token).send({userName: user.userName, password:req.body.password, x_auth: token, pantry: user.pantry, shoppingList: user.shoppingList});
   }).catch((e) => {
       res.status(400).send(e);
   });
@@ -38,7 +38,7 @@ module.exports.loginUser = async (req, res) => {
       return res.status(400).send();
     }
     return user.generateAuthToken().then((token) => {
-      res.header('x_auth', token).send({userName: user.userName, password:req.body.password, pantry: user.pantry, shoppingList: user.shoppingList});
+      res.header('x_auth', token).send({userName: user.userName, password:req.body.password, x_auth: token, pantry: user.pantry, shoppingList: user.shoppingList});
     });
   }).catch((e) => {
     if (e.message === 'username not found') {

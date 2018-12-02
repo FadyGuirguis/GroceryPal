@@ -4,7 +4,7 @@ User = mongoose.model('User');
 
 let authenticate = (req, res, next) => {
 
-    let token = req.header('x-auth');
+    let token = req.header('x_auth');
 
     User.findByToken(token).then((user)=>{
 

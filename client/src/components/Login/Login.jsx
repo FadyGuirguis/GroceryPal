@@ -40,8 +40,7 @@ class Login extends Component {
       password: this.state.password
     })
     .then((response) => {
-      api.defaults.headers['x_auth'] = `${response.headers.x_auth}`
-      
+      api.defaults.headers['x_auth'] = `${response.data.x_auth}`
       this.props.setUser({
         username: response.data.userName,
         password: response.data.password,

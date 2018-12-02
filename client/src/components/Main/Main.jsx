@@ -208,15 +208,66 @@ class Main extends Component {
   // it back to false when you're done
 
   deleteShoppingListItem(item) {
-
+    this.setState({shoppingListDisabled: true});
+    
+    let newShoppingList = this.state.shoppingList;
+    newShoppingList.splice(newShoppingList.indexOf(item), 1);
+    
+    api.post('/lists', {
+      shoppingList: newShoppingList
+    })
+    .then((response) => {
+      this.setState({shoppingList: response.data.shoppingList,
+        shoppingListDisabled: false
+      })
+    })
+    .catch((error) => {
+      this.setState({shoppingListDisabled: false})
+    })
   };
 
   moveFromShoppingListToPantry(item) {
-    
+    this.setState({shoppingListDisabled: true});
+
+    let newShoppingList = this.state.shoppingList;
+    newShoppingList.splice(newShoppingList.indexOf(item), 1);
+
+    let newPantry = this.state.pantry;
+    newPantry.push(item);
+
+    api.post('/lists', {
+      shoppingList: newShoppingList,
+      pantry: newPantry
+    })
+    .then((response) => {
+      this.setState({shoppingList: response.data.shoppingList, 
+        pantry: response.data.pantry, 
+        shoppingListDisabled: false
+      })
+    })
+    .catch((error) => {
+      this.setState({shoppingListDisabled: false})
+    })
   };
 
   addToShoppingList() {
     // item to add is stored in state.shoppingListAdd
+    this.setState({shoppingListDisabled: true});
+
+    let newShoppingList = this.state.shoppingList;
+    newShoppingList.push(this.state.shoppingListAdd);
+
+    api.post('/lists', {
+      shoppingList: newShoppingList
+    })
+    .then((response) => {
+      this.setState({shoppingList: response.data.shoppingList,
+        shoppingListDisabled: false
+      })
+    })
+    .catch((error) => {
+      this.setState({shoppingListDisabled: false})
+    })
   };
 
   // pantry action handlers
@@ -225,15 +276,66 @@ class Main extends Component {
   // it back to false when you're done
 
   deletePantryItem(item) {
+    this.setState({shoppingListDisabled: true});
 
+    let newPantry = this.state.pantry;
+    newPantry.splice(newPantry.indexOf(item), 1);
+
+    api.post('/lists', {
+      pantry: newPantry
+    })
+    .then((response) => {
+      this.setState({pantry: response.data.pantry,
+        shoppingListDisabled: false
+      })
+    })
+    .catch((error) => {
+      this.setState({shoppingListDisabled: false})
+    })
   };
 
   moveFromPantryToShoppingList(item) {
-  
+    this.setState({shoppingListDisabled: true});
+
+    let newPantry = this.state.pantry;
+    newPantry.splice(newPantry.indexOf(item), 1);
+
+    let newShoppingList = this.state.shoppingList;
+    newShoppingList.push(item);
+
+    api.post('/lists', {
+      pantry: newPantry,
+      shoppingList: newShoppingList
+    })
+    .then((response) => {
+      this.setState({pantry: response.data.pantry,
+        shoppingList: response.data.shoppingList,  
+        shoppingListDisabled: false
+      })
+    })
+    .catch((error) => {
+      this.setState({shoppingListDisabled: false})
+    })
   };
 
   addToPantry() {
-    // item to add is stored in state.shoppingListAdd
+    // item to add is stored in state.pantryAdd
+    this.setState({shoppingListDisabled: true});
+
+    let newPantry = this.state.pantry;
+    newPantry.push(this.state.pantryAdd);
+    
+    api.post('/lists', {
+      pantry: newPantry
+    })
+    .then((response) => {
+      this.setState({pantry: response.data.pantry,
+        shoppingListDisabled: false
+      })
+    })
+    .catch((error) => {
+      this.setState({shoppingListDisabled: false})
+    })
   };
 
   render () {
