@@ -28,6 +28,8 @@ app.use(
 app.use(bodyParser.urlencoded({ extended: false })); // Parses urlencoded bodies
 app.use(bodyParser.json()); //Parses request bodies
 
+app.use('/', express.static(__dirname + '/client' + '/build'));
+
 // User routes
 app.post('/register', asyncMiddleware(userController.createUser));
 app.post('/login', asyncMiddleware(userController.loginUser));
