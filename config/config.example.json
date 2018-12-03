@@ -1,0 +1,9 @@
+{
+    "development": {
+      "PORT": 4000,
+      "MONGODB_URI": "{local mongodb url}/grocerypal-development",
+      "JWT_SECRET": "secret",
+      "APP_ID": "appid",
+      "APP_KEY": "appkey"
+    }
+  } 
